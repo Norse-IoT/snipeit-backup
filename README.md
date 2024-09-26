@@ -1,6 +1,6 @@
 # snipeit-backup
 
-For context, Tyler installed snipeit on a raspberry pi to act as our asset manager.
+For context, Tyler installed [Snipe-IT](https://snipeitapp.com/) on a [Raspberry Pi](https://www.raspberrypi.com/) to act as our asset manager.
 
 # Backups 
 
