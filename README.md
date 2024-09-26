@@ -16,9 +16,9 @@ To download the backup onto another machine, we can use the [backups](https://sn
 
 To access this API, you must create a user in SnipeIt that [has the superuser](https://github.com/snipe/snipe-it/blob/6c85ba3495a005be6a413e014c51b25a820db31a/routes/web.php#L180) entitlement.
 
-You should then create a Personal Access Token for yourself, and store it as TOKEN in your `.env` file.
+You should then create a Personal Access Token for yourself, and store it as `SNIPEIT_TOKEN` in your `.env` file.
 
-This should last ~15 years. It will be the automated way to backup file content.
+This token should last ~15 years. It will be the automated way to backup file content.
 
 Be careful not to leak it.
 
