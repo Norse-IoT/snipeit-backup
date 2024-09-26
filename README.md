@@ -52,6 +52,9 @@ $ source venv/bin/activate
 $ pip3 install -r requirements.txt
 ```
 
+On the machine I want to download the backups to, I've added this crontab:
 
-
+```cron
+* */12 * * * /home/iplus/snipeit-backup/venv/bin/python3 /home/iplus/snipeit-backup/backup.py > /var/log/snipeit-backup.log
+```
 
