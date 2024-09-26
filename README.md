@@ -32,6 +32,25 @@ $ crontab -e
 
 You can checkout <https://crontab-generator.org/> for more info.
 
+Here's the crontab I used to backup every two days at 4am:
+
+We anticipate that nobody is going to be logging new stuff at exactly 4am.
+
+```cron
+0 4 1-31/2 * * /usr/bin/php /var/www/html/snipeit/artisan snipeit:backup > /var/log/snipeit-backup.log
+```
+
+These backups will then be downloaded by our download script.
+
+# venv
+
+It is expected to use this project with [a Python virtual environment](https://docs.python.org/3/library/venv.html).
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip3 install -r requirements.txt
+```
 
 
 
