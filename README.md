@@ -2,7 +2,13 @@
 
 For context, Tyler installed [Snipe-IT](https://snipeitapp.com/) on a [Raspberry Pi](https://www.raspberrypi.com/) to act as our asset manager.
 
-# Backups 
+## Setup
+
+You should run `git clone https://github.com/gh-350/snipeit-data.git` in this directory.
+
+This program will automatically push content to this repo, as long as the permissions are set up properly.
+
+## Backups 
 
 We can run:
 

@@ -1,13 +1,17 @@
 import requests
 import os
 from dotenv import load_dotenv, find_dotenv
+from git import Repo, Actor
 
 load_dotenv(find_dotenv())
 
 SNIPEIT_TOKEN = os.environ.get("SNIPEIT_TOKEN")
-BASE = os.environ.get("SNIPEIT_BASE_URL") or "http://10.0.1.77"
+BASE = os.environ.get("SNIPEIT_BASE_URL") or "http://10.0.1.4/"
 SCRIPT_LOCATION = os.path.dirname(__file__)
-BACKUP_DIR = os.environ.get("SNIPEIT_BACKUP_DIR") or f"{SCRIPT_LOCATION}/backups"
+BACKUP_DIR = os.environ.get("SNIPEIT_BACKUP_DIR") or f"{SCRIPT_LOCATION}/snipeit-data"
+
+repo = Repo(BACKUP_DIR)
+assert not repo.bare
 
 HEADERS = {
     "accept": "application/json",
@@ -27,13 +31,23 @@ def get_local_backups() -> set[str]:
     return set(os.listdir(BACKUP_DIR))
 
 def download_backup(backup_name: str):
+    """Downloads a file and adds it to git"""
     print(f"DOWNLOADING {backup_name}...")
 
     url = f"{BASE}/api/v1/settings/backups/download/{backup_name}"
 
     response = requests.get(url, headers=HEADERS)
 
-    open(f"{BACKUP_DIR}/{backup_name}", 'wb').write(response.content)
+    filepath = os.path.join(BACKUP_DIR, backup_name)
+    open(filepath, 'wb').write(response.content)
+    repo.index.add([filepath])  # Add a new file to the index.
+
+def sync_backups():
+    """Commits & Pushes backups in GitHub"""
+
+    bot = Actor("Norse IoT Bot", "connect@norseiot.club")
+    repo.index.commit("[auto] Update backups", author=bot, committer=bot)
+    repo.remotes.origin.push()
 
 def backup_snipeit():
     print("Starting backup...")
@@ -45,8 +59,9 @@ def backup_snipeit():
     for filename in to_download:
         download_backup(filename)
 
-    print("done!")
+    sync_backups()
 
+    print("done!")
 
 backup_snipeit()
 
