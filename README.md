@@ -4,7 +4,7 @@ For context, Tyler installed [Snipe-IT](https://snipeitapp.com/) on a [Raspberry
 
 ## Setup
 
-You should run `git clone https://github.com/gh-350/snipeit-data.git` in this directory.
+You should run `git clone https://github.com/Norse-IoT/snipeit-data` in this directory.
 
 This program will automatically push content to this repo, as long as the permissions are set up properly.
 
