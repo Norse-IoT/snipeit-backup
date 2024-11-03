@@ -43,7 +43,7 @@ Here's the crontab I used to backup every two days at 4am:
 We anticipate that nobody is going to be logging new stuff at exactly 4am.
 
 ```cron
-0 4 1-31/2 * * /usr/bin/php /var/www/html/snipeit/artisan snipeit:backup > /var/log/snipeit-backup.log
+0 4 1-31/2 * * /usr/bin/php /var/www/html/snipeit/artisan snipeit:backup >> /var/log/snipeit-backup.log
 ```
 
 These backups will then be downloaded by our download script.
@@ -61,6 +61,6 @@ $ pip3 install -r requirements.txt
 On the machine I want to download the backups to, I've added this crontab:
 
 ```cron
-* */12 * * * /home/iplus/snipeit-backup/venv/bin/python3 /home/iplus/snipeit-backup/backup.py > /var/log/snipeit-backup.log
+* */12 * * * /home/iplus/snipeit-backup/venv/bin/python3 /home/iplus/snipeit-backup/backup.py >> /var/log/snipeit-backup.log
 ```
 
